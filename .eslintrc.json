@@ -1,12 +1,7 @@
 {
-    "plugins": [
-        "prettier"
-    ],
-    "rules": {
-        "prettier/prettier": "error"
-    },
-    "extends": [
-        "plugin:prettier/recommended",
-        "xo/esnext"
-    ]
+  "extends": ["xo/esnext", "plugin:prettier/recommended"],
+  "env": {
+    "node": true,
+    "jest": true
+  }
 }

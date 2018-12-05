@@ -2,11 +2,11 @@
 
 const chalk = require('chalk');
 const Generator = require('yeoman-generator');
+const packageJson = require('../../package.json');
 
 module.exports = class extends Generator {
-/* eslint-disable */
   initializing() {
-
+    /* eslint-disable */
     this.log(
       `${chalk.green(`
     ███████         ███     ███   ███████   ██████      ██     ██  ██       ███████
@@ -18,20 +18,20 @@ module.exports = class extends Generator {
     /* eslint-disable */
     this.log(
       `Welcome to the ${chalk.bold.green('JHipster Module')} ${chalk.yellow(
-        `v${standalonePackageJson.version}`
+        `v${packageJson.version}`
       )} generator!`
     );
   }
 
   prompting() {
     this.config.set({
-      version: standalonePackageJson.version
+      version: packageJson.version
     });
   }
 
-  writing() { }
+  writing() {}
 
-  install() { }
+  install() {}
 
   end() {
     this.log('JHipster module generated successfully.');
