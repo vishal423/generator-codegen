@@ -12,7 +12,8 @@ module.exports = class extends Generator {
     ██      ██    ██      ██   ██     ██    ██                  ██            ██            ██  ██    ██
     ██            ██      ██   ██      ██   ███████     █████   ██    ████    ███████       ██    ██  ██
     ██      ██    ██      ██   ██     ██    ██                  ██      ██    ██            ██      ████
-     ████████      ████████    ████████     ██████████          ██████████    ██████████    ██        ██    
+     ████████      ████████    ████████     ██████████          ██████████    ██████████    ██        ██
+     
 `)}`
     );
     this.log(
@@ -31,35 +32,30 @@ module.exports = class extends Generator {
   writing() {
     this.fs.copy(this.templatePath('static/.*'), this.destinationPath('.'));
 
-    this.fs.copy(
-      this.templatePath('generators/app/templates/.*'),
-      this.destinationPath('./generators/app/templates')
-    );
+    this.fs.copy(this.templatePath('generators/**/.*'), this.destinationPath('./generators'));
     this.fs.copy(this.templatePath('tests/.*'), this.destinationPath('./__tests__'));
 
-    this.fs.copyTpl(this.templatePath('dynamic/LICENSE'), this.destinationPath(`./LICENSE`), {});
+    this.fs.copyTpl(
+      this.templatePath('dynamic/LICENSE.ejs'),
+      this.destinationPath(`./LICENSE`),
+      {}
+    );
 
     this.fs.copyTpl(
-      this.templatePath('dynamic/package.json'),
+      this.templatePath('dynamic/package.json.ejs'),
       this.destinationPath(`./package.json`),
       {}
     );
 
     this.fs.copyTpl(
-      this.templatePath('dynamic/README.md'),
+      this.templatePath('dynamic/README.md.ejs'),
       this.destinationPath(`./README.md`),
       {}
     );
 
     this.fs.copyTpl(
-      this.templatePath('dynamic/README.md'),
+      this.templatePath('dynamic/README.md.ejs'),
       this.destinationPath(`./README.md`),
-      {}
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('generators/app/index.js'),
-      this.destinationPath(`./generators/app/index.js`),
       {}
     );
   }
