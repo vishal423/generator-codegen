@@ -1,8 +1,8 @@
 {
-  "name": "generator-jmodule",
+  "name": "generator-codegen",
   "version": "0.0.0",
-  "description": "Yeoman generator to scaffold new JHipster module.",
-  "homepage": "https://github.com/vishal423/generator-jmodule",
+  "description": "Yeoman generator to scaffold new generator.",
+  "homepage": "https://github.com/vishal423/generator-codegen",
   "author": {
     "name": "Vishal Mahajan",
     "email": "vishal423@gmail.com",
@@ -53,6 +53,6 @@
       "git add"
     ]
   },
-  "repository": "vishal423/generator-jmodule",
+  "repository": "vishal423/generator-codegen",
   "license": "MIT"
 }
