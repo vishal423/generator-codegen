@@ -14,7 +14,19 @@ yarn global add generator-codegen
 ```
 
 # Usage
-TBD
+- Navigate to directory where you would like to scaffold new generator.
+- Use following command to scaffold generator :
+
+  ```bash
+  yo codegen
+  ```
+- Provide appropriate prompt answers. This information will be used during generation.
+- You can also provide `full name`, `email address`, `GitHub username` information with command line arguments (in given order):
+  ```bash
+  yo codegen "full name" "email address" "GitHub username"
+  ```
+- Resolve conflicts, if any.
+- After successful generation, you can try out new generator using yarn link.
 
 ## License
 
