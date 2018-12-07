@@ -5,58 +5,56 @@ const Generator = require('yeoman-generator');
 const packageJson = require('../../package.json');
 
 module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+
+    this.argument('name', { type: String, required: false });
+  }
+
   initializing() {
     this.log(
       `${chalk.green(`
-     ████████      ████████    ████████     ██████████          ██████████    ██████████    ████      ██
-    ██      ██    ██      ██   ██     ██    ██                  ██            ██            ██  ██    ██
-    ██            ██      ██   ██      ██   ███████     █████   ██    ████    ███████       ██    ██  ██
-    ██      ██    ██      ██   ██     ██    ██                  ██      ██    ██            ██      ████
-     ████████      ████████    ████████     ██████████          ██████████    ██████████    ██        ██
-     
+     ███████  ████████  █████     ████████        ████████  ████████  ███    ██
+    ██        ██    ██  ██   ██   ██              ██        ██        █████  ██
+    ██        ██    ██  ██    ██  ██████    ████  ██   ███  ██████    ██  ██ ██
+    ██        ██    ██  ██   ██   ██              ██    ██  ██        ██   ████
+     ███████  ████████  █████     ████████        ████████  ████████  ██    ███    
 `)}`
     );
     this.log(
-      `Welcome to the ${chalk.bold.green('CodeGen')} ${chalk.yellow(
+      `Welcome to the Yeoman ${chalk.bold.green('<%=generatorName%>')} ${chalk.yellow(
         `v${packageJson.version}`
       )} generator!`
     );
+
+    this.contextOptions = {
+      name: this.options.name || this.config.get('name')
+    };
   }
 
-  prompting() {
+  async prompting() {
+    if (!this.contextOptions.name) {
+      const answer = await this.prompt({
+        type: 'input',
+        name: 'name',
+        message: 'Specify your full name > '
+      });
+      this.contextOptions.name = answer.name;
+    }
+  }
+
+  configuring() {
     this.config.set({
-      version: packageJson.version
+      version: packageJson.version,
+      name: this.contextOptions.name
     });
   }
 
   writing() {
-    this.fs.copy(this.templatePath('static/.*'), this.destinationPath('.'));
-
-    this.fs.copy(this.templatePath('generators/**/.*'), this.destinationPath('./generators'));
-    this.fs.copy(this.templatePath('tests/.*'), this.destinationPath('./__tests__'));
-
     this.fs.copyTpl(
-      this.templatePath('dynamic/LICENSE.ejs'),
-      this.destinationPath(`./LICENSE`),
-      {}
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('dynamic/package.json.ejs'),
-      this.destinationPath(`./package.json`),
-      {}
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('dynamic/README.md.ejs'),
-      this.destinationPath(`./README.md`),
-      {}
-    );
-
-    this.fs.copyTpl(
-      this.templatePath('dynamic/README.md.ejs'),
-      this.destinationPath(`./README.md`),
-      {}
+      this.templatePath('sample.txt'),
+      this.destinationPath(`./sample.txt`),
+      this.contextOptions
     );
   }
 
@@ -66,6 +64,6 @@ module.exports = class extends Generator {
   }
 
   end() {
-    this.log('Scaffolding of new Yeoman generator completed successfully.');
+    this.log('Execution completed successfully.');
   }
 };

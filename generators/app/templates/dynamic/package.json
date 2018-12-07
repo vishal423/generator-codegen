@@ -1,12 +1,12 @@
 {
-  "name": "generator-codegen",
+  "name": "generator-<%=generatorName%>",
   "version": "0.0.0",
-  "description": "Yeoman generator to scaffold new generator.",
-  "homepage": "https://github.com/vishal423/generator-codegen",
+  "description": "<%=description%>",
+  "homepage": "https://github.com/<%=githubUsername%>/generator-<%=generatorName%>",
   "author": {
-    "name": "Vishal Mahajan",
-    "email": "vishal423@gmail.com",
-    "url": "https://twitter.com/vishal423"
+    "name": "<%=name%>",
+    "email": "<%=email%>",
+    "url": "https://github.com/<%=githubUsername%>/generator-<%=generatorName%>"
   },
   "files": [
     "generators"
@@ -51,6 +51,6 @@
       "git add"
     ]
   },
-  "repository": "vishal423/generator-codegen",
+  "repository": "<%=githubUsername%>/generator-<%=generatorName%>",
   "license": "MIT"
 }

@@ -10,16 +10,17 @@ module.exports = class extends Generator {
 
     this.argument('name', { type: String, required: false });
     this.argument('email', { type: String, required: false });
+    this.argument('githubUsername', { type: String, required: false });
   }
 
   initializing() {
     this.log(
       `${chalk.green(`
-     ████████     ████████    ███████      █████████           ██████████   █████████   ███       ██
-    ██      ██   ██      ██   ██     ██    ██                  ██           ██          ██ ██     ██
-    ██           ██      ██   ██      ██   ███████     █████   ██    ████   ███████     ██   ██   ██
-    ██      ██   ██      ██   ██     ██    ██                  ██      ██   ██          ██     ██ ██
-     ████████     ████████    ███████      █████████           ██████████   █████████   ██       ███    
+     ███████  ████████  █████     ████████        ████████  ████████  ███    ██
+    ██        ██    ██  ██   ██   ██              ██        ██        █████  ██
+    ██        ██    ██  ██    ██  ██████    ████  ██   ███  ██████    ██  ██ ██
+    ██        ██    ██  ██   ██   ██              ██    ██  ██        ██   ████
+     ███████  ████████  █████     ████████        ████████  ████████  ██    ███    
 `)}`
     );
     this.log(
@@ -30,7 +31,10 @@ module.exports = class extends Generator {
 
     this.contextOptions = {
       name: this.options.name || this.config.get('name'),
-      email: this.options.email || this.config.get('email')
+      email: this.options.email || this.config.get('email'),
+      generatorName: this.options.generatorName || this.config.get('generatorName'),
+      description: this.options.generatorDescription || this.config.get('description'),
+      githubUsername: this.options.githubUsername || this.config.get('githubUsername')
     };
   }
 
@@ -52,13 +56,43 @@ module.exports = class extends Generator {
       });
       this.contextOptions.email = answer.email;
     }
+
+    if (!this.contextOptions.githubUsername) {
+      const answer = await this.prompt({
+        type: 'input',
+        name: 'githubUsername',
+        message: 'Specify your GitHub username > '
+      });
+      this.contextOptions.githubUsername = answer.githubUsername;
+    }
+
+    if (!this.contextOptions.generatorName) {
+      const answer = await this.prompt({
+        type: 'input',
+        name: 'generatorName',
+        message: 'Specify your generator name (without generator- prefix) > '
+      });
+      this.contextOptions.generatorName = answer.generatorName;
+    }
+
+    if (!this.contextOptions.description) {
+      const answer = await this.prompt({
+        type: 'input',
+        name: 'description',
+        message: 'Specify some description about your generator > '
+      });
+      this.contextOptions.description = answer.description;
+    }
   }
 
   configuring() {
     this.config.set({
       version: packageJson.version,
       name: this.contextOptions.name,
-      email: this.contextOptions.email
+      email: this.contextOptions.email,
+      githubUsername: this.contextOptions.githubUsername,
+      generatorName: this.contextOptions.generatorName,
+      description: this.contextOptions.description
     });
   }
 
@@ -66,9 +100,10 @@ module.exports = class extends Generator {
     this.fs.copy(this.templatePath('static/.*'), this.destinationPath('.'));
 
     this.fs.copy(
-      this.templatePath('generators/app/templates/.*'),
-      this.destinationPath('./generators/app/templates')
+      this.templatePath('generators/app/templates/sample.txt'),
+      this.destinationPath('./generators/app/templates/sample.txt')
     );
+
     this.fs.copy(this.templatePath('tests/.*'), this.destinationPath('./__tests__'));
 
     this.fs.copyTpl(
@@ -80,19 +115,19 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('dynamic/package.json'),
       this.destinationPath(`./package.json`),
-      {}
+      this.contextOptions
     );
 
     this.fs.copyTpl(
       this.templatePath('dynamic/README.md'),
       this.destinationPath(`./README.md`),
-      {}
+      this.contextOptions
     );
 
     this.fs.copyTpl(
       this.templatePath('generators/app/index.js'),
       this.destinationPath(`./generators/app/index.js`),
-      {}
+      this.contextOptions
     );
   }
 
@@ -102,6 +137,6 @@ module.exports = class extends Generator {
   }
 
   end() {
-    this.log('Scaffolding of new Yeoman generator completed successfully.');
+    this.log(chalk.green('Scaffolding of new Yeoman generator completed successfully.'));
   }
 };
