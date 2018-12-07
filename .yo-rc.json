@@ -1,5 +1,10 @@
 {
   "generator-codegen": {
-    "version": "0.0.1"
+    "version": "0.0.1",
+    "name": "Vishal Mahajan",
+    "email": "vishal423@gmail.com",
+    "githubUsername": "vishal423",
+    "generatorName": "codegen",
+    "description": "Yeoman generator to scaffold new generators"
   }
 }
