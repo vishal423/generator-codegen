@@ -104,7 +104,7 @@ module.exports = class extends Generator {
       this.destinationPath('./generators/app/templates/sample.txt')
     );
 
-    this.fs.copy(this.templatePath('tests/.*'), this.destinationPath('./__tests__'));
+    this.fs.copy(this.templatePath('tests/**.*'), this.destinationPath('./__tests__'));
 
     this.fs.copyTpl(
       this.templatePath('dynamic/LICENSE'),
