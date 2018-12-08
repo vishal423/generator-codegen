@@ -37,7 +37,7 @@ module.exports = class extends Generator {
       const answer = await this.prompt({
         type: 'input',
         name: 'name',
-        message: 'Specify your full name > '
+        message: 'Specify your name > '
       });
       this.contextOptions.name = answer.name;
     }
