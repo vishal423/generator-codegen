@@ -1,6 +1,6 @@
 {
   "name": "generator-codegen",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Yeoman generator to scaffold new generators",
   "homepage": "https://github.com/vishal423/generator-codegen",
   "author": {
