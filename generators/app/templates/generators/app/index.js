@@ -3,6 +3,7 @@
 const chalk = require('chalk');
 const Generator = require('yeoman-generator');
 const packageJson = require('../../package.json');
+const figlet = require('figlet');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -12,17 +13,16 @@ module.exports = class extends Generator {
   }
 
   initializing() {
+
+    const banner = figlet.textSync('<%= generatorName%>', {
+      font: 'Standard',
+      horizontalLayout: 'full',
+      verticalLayout: 'full'
+    });
+
     this.log(
-      `${chalk.green(`
-     ███████  ████████  █████     ████████        ████████  ████████  ███    ██
-    ██        ██    ██  ██   ██   ██              ██        ██        █████  ██
-    ██        ██    ██  ██    ██  ██████    ████  ██   ███  ██████    ██  ██ ██
-    ██        ██    ██  ██   ██   ██              ██    ██  ██        ██   ████
-     ███████  ████████  █████     ████████        ████████  ████████  ██    ███    
-`)}`
-    );
-    this.log(
-      `Welcome to the Yeoman ${chalk.bold.green('<%=generatorName%>')} ${chalk.yellow(
+      `${chalk.green(banner)}
+  Welcome to the Yeoman ${chalk.bold.green('<%=generatorName%>')} ${chalk.yellow(
         `v${packageJson.version}`
       )} generator!`
     );
