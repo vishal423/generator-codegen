@@ -85,14 +85,6 @@ module.exports = class extends Generator {
       this.contextOptions.type = answer.type;
     }
 
-    if (this.contextOptions.type === 'jhipster-module') {
-      this.contextOptions.npmPackageName = `generator-jhipster-${
-        this.contextOptions.generatorName
-      }`;
-    } else {
-      this.contextOptions.npmPackageName = `generator-${this.contextOptions.generatorName}`;
-    }
-
     if (!this.contextOptions.generatorName) {
       const answer = await this.prompt({
         type: 'input',
@@ -124,6 +116,14 @@ module.exports = class extends Generator {
       generatorName: this.contextOptions.generatorName,
       description: this.contextOptions.description
     });
+
+    if (this.contextOptions.type === 'jhipster-module') {
+      this.contextOptions.npmPackageName = `generator-jhipster-${
+        this.contextOptions.generatorName
+      }`;
+    } else {
+      this.contextOptions.npmPackageName = `generator-${this.contextOptions.generatorName}`;
+    }
   }
 
   writing() {
@@ -155,7 +155,11 @@ module.exports = class extends Generator {
     );
 
     this.fs.copyTpl(
-      this.templatePath('generators/app/index.js'),
+      this.templatePath(
+        `generators/app/index${
+          this.contextOptions.type === 'jhipster-module' ? '-jhmodule' : ''
+        }.js`
+      ),
       this.destinationPath(`./generators/app/index.js`),
       this.contextOptions
     );
