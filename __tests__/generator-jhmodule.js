@@ -35,7 +35,7 @@ describe('scaffold new jhipster module generator', () => {
           'README.md',
           'generators/app/index.js',
           'generators/app/templates/sample.txt',
-          '__tests__/generator-generic.js'
+          '__tests__/oauth2-gateway.spec.js'
         ]);
         assert.fileContent('LICENSE', /Copyright \(c\) 2018 John Doe <john\.doe@localhost\.com>/);
         assert.fileContent('README.md', /yarn global add generator-jhipster-angular/);
@@ -76,7 +76,7 @@ describe('scaffold new jhipster module generator', () => {
           'README.md',
           'generators/app/index.js',
           'generators/app/templates/sample.txt',
-          '__tests__/generator-generic.js'
+          '__tests__/oauth2-gateway.spec.js'
         ]);
         assert.fileContent('LICENSE', /Copyright \(c\) 2018 John Doe <john\.doe@localhost\.com>/);
         assert.fileContent('README.md', /yarn global add generator-jhipster-angular/);

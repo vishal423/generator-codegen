@@ -134,7 +134,21 @@ module.exports = class extends Generator {
       this.destinationPath('./generators/app/templates/sample.txt')
     );
 
-    this.fs.copy(this.templatePath('tests/**.*'), this.destinationPath('./__tests__'));
+    if (this.contextOptions.type === 'jhipster-module') {
+      this.fs.copy(
+        this.templatePath('tests/oauth2-gateway.js'),
+        this.destinationPath('./__tests__/oauth2-gateway.spec.js')
+      );
+      this.fs.copy(
+        this.templatePath('tests/templates/oauth2-gateway/.yo-rc.json'),
+        this.destinationPath('./__tests__/templates/oauth2-gateway/.yo-rc.json')
+      );
+    } else {
+      this.fs.copy(
+        this.templatePath('tests/generator-generic.js'),
+        this.destinationPath('./__tests__/generic.spec.js')
+      );
+    }
 
     this.fs.copyTpl(
       this.templatePath('dynamic/LICENSE'),

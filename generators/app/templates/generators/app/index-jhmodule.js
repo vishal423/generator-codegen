@@ -22,7 +22,6 @@ module.exports = class extends BaseGenerator {
   }
 
   initializing() {
-
     /* eslint-disable */
 
     // can access yeoman configurations defined in .yo-rc.json
@@ -48,7 +47,9 @@ module.exports = class extends BaseGenerator {
     });
 
     this.log(`${chalk.green(banner)}
-  Welcome to the JHipster module :: ${chalk.bold.green('<%=generatorName%>')} ${chalk.yellow(`v${packageJson.version}`)}`);
+  Welcome to the JHipster module :: ${chalk.bold.green('<%=generatorName%>')} ${chalk.yellow(
+      `v${packageJson.version}`
+    )}`);
 
     this.contextOptions = {
       name: this.options.name || this.config.get('name')
