@@ -13,7 +13,6 @@ module.exports = class extends Generator {
   }
 
   initializing() {
-
     const banner = figlet.textSync('<%= generatorName%>', {
       font: 'Standard',
       horizontalLayout: 'full',
