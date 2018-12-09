@@ -13,6 +13,10 @@
   ],
   "main": "generators/index.js",
   "keywords": [
+    <%_ if(type === 'jhipster-module') { _%>
+    "jhipster-module",
+    "jhipster-5",
+    <%_ } _%>
     "yeoman-generator"
   ],
   "devDependencies": {
@@ -32,6 +36,9 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "figlet": "^1.2.1",
+    <%_ if(type === 'jhipster-module') {_%>
+    "generator-jhipster": ">=5.0.0",
+    <%_ } _%>
     "yeoman-generator": "^3.1.1"
   },
   "jest": {

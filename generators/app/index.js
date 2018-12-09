@@ -32,6 +32,7 @@ module.exports = class extends Generator {
     this.contextOptions = {
       name: this.options.name || this.config.get('name'),
       email: this.options.email || this.config.get('email'),
+      type: this.options.type || this.config.get('type'),
       generatorName: this.options.generatorName || this.config.get('generatorName'),
       description: this.options.generatorDescription || this.config.get('description'),
       githubUsername: this.options.githubUsername || this.config.get('githubUsername')
@@ -65,6 +66,24 @@ module.exports = class extends Generator {
       });
       this.contextOptions.githubUsername = answer.githubUsername;
     }
+    if (!this.contextOptions.type) {
+      const answer = await this.prompt({
+        type: 'list',
+        name: 'type',
+        message: 'Choose generator type > ',
+        choices: [
+          {
+            name: 'Generic',
+            value: 'generic'
+          },
+          {
+            name: 'JHipster Module',
+            value: 'jhipster-module'
+          }
+        ]
+      });
+      this.contextOptions.type = answer.type;
+    }
 
     if (!this.contextOptions.generatorName) {
       const answer = await this.prompt({
@@ -91,6 +110,7 @@ module.exports = class extends Generator {
       name: this.contextOptions.name,
       email: this.contextOptions.email,
       githubUsername: this.contextOptions.githubUsername,
+      type: this.contextOptions.type,
       generatorName: this.contextOptions.generatorName,
       description: this.contextOptions.description
     });
@@ -113,7 +133,7 @@ module.exports = class extends Generator {
     );
 
     this.fs.copyTpl(
-      this.templatePath('dynamic/package.json'),
+      this.templatePath('dynamic/package.json.ejs'),
       this.destinationPath(`./package.json`),
       this.contextOptions
     );
