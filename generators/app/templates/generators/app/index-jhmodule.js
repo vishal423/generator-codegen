@@ -25,7 +25,7 @@ module.exports = class extends BaseGenerator {
     /* eslint-disable */
 
     // can access yeoman configurations defined in .yo-rc.json
-    this.jhipsterAppConfig = this.getJhipsterAppConfig();
+    this.jhipsterAppConfig = this.getAllJhipsterConfig();
     this.baseName = this.jhipsterAppConfig.baseName;
     this.packageName = this.jhipsterAppConfig.packageName;
     this.clientFramework = this.jhipsterAppConfig.clientFramework;
