@@ -58,8 +58,7 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.log(`Installing dependencies`);
-    this.yarnInstall();
+    this.log(`Install client dependencies`);
   }
 
   end() {

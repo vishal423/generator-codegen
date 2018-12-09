@@ -85,11 +85,21 @@ module.exports = class extends Generator {
       this.contextOptions.type = answer.type;
     }
 
+    if (this.contextOptions.type === 'jhipster-module') {
+      this.contextOptions.npmPackageName = `generator-jhipster-${
+        this.contextOptions.generatorName
+      }`;
+    } else {
+      this.contextOptions.npmPackageName = `generator-${this.contextOptions.generatorName}`;
+    }
+
     if (!this.contextOptions.generatorName) {
       const answer = await this.prompt({
         type: 'input',
         name: 'generatorName',
-        message: 'Specify your generator name (without generator- prefix) > '
+        message: `Specify your generator name (without generator-${
+          this.contextOptions.type === 'jhipster-module' ? 'jhipster-' : ''
+        } prefix) > `
       });
       this.contextOptions.generatorName = answer.generatorName;
     }
