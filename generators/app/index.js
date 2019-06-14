@@ -20,7 +20,7 @@ module.exports = class extends Generator {
     ██        ██    ██  ██   ██   ██              ██        ██        █████  ██
     ██        ██    ██  ██    ██  ██████    ████  ██   ███  ██████    ██  ██ ██
     ██        ██    ██  ██   ██   ██              ██    ██  ██        ██   ████
-     ███████  ████████  █████     ████████        ████████  ████████  ██    ███    
+     ███████  ████████  █████     ████████        ████████  ████████  ██    ███
 `)}`
     );
     this.log(
@@ -66,6 +66,7 @@ module.exports = class extends Generator {
       });
       this.contextOptions.githubUsername = answer.githubUsername;
     }
+
     if (!this.contextOptions.type) {
       const answer = await this.prompt({
         type: 'list',
@@ -118,9 +119,7 @@ module.exports = class extends Generator {
     });
 
     if (this.contextOptions.type === 'jhipster-module') {
-      this.contextOptions.npmPackageName = `generator-jhipster-${
-        this.contextOptions.generatorName
-      }`;
+      this.contextOptions.npmPackageName = `generator-jhipster-${this.contextOptions.generatorName}`;
     } else {
       this.contextOptions.npmPackageName = `generator-${this.contextOptions.generatorName}`;
     }
