@@ -16,7 +16,7 @@
     <%_ if(type === 'jhipster-module') { _%>
     "jhipster-module",
     "jhipster-5",
-    "jhipster-6"
+    "jhipster-6",
     <%_ } _%>
     "yeoman-generator"
   ],
@@ -42,7 +42,10 @@
     "yeoman-generator": "^4.0.1"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/__tests__/**/*.[j]s"
+    ]
   },
   "scripts": {
     "pretest": "eslint .",
